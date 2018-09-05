@@ -6,11 +6,11 @@ import React, { Component } from 'react'
 
 //objects with image property
 
-class Rotator extends Component {
+class Rotator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected = 0
+            selected: 0
         }
     }
 
@@ -21,25 +21,33 @@ class Rotator extends Component {
         let rotationStyles = {};
         let currentAngle = 180;
         let currentObject = this.state.selected;
-
         for(let i = 0; i < numOfObjects; i++) {
             rotationStyles[currentObject] = {
                 transform: `rotate(${currentAngle}DEG)`
             }
             currentAngle+=angle;
-            currentObject = currentObject+1 < numOfObjects ? currentObjects+1 : 0;
+            currentObject = currentObject+1 < numOfObjects ? currentObject+1 : 0;
         }
+        return rotationStyles;
+    }
+    
+    onClick(i) {
+        let { onClick, objects } = this.props;
+        this.setState({ selected: i }, () => {
+            onClick(objects[i]);
+        })
     }
 
     render() {
         let { objects } = this.props;
-        let rotationClasses = this.createRotationStyles();
+        let rotationStyles = this.createRotationStyles();
         return(
             <React.Fragment>
                 {
                     objects.map((obj, i) => {
                         return (
-                            <div style={rotationClasses[i]} onClick={() => { this.setState({selected:i}) }}>
+                            <div className="block" key={i} style={rotationStyles[i]} onClick={() => { this.setState({selected:i}) }}>
+                                {obj}
                             </div>
                         )
                     })
