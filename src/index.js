@@ -19,6 +19,7 @@ class Rotator extends React.Component {
         this.createRotationStyles();
     }
 
+    //TODO create a custome the currentAngle. so it adds the angle so rotates clockwise
     createRotationStyles(i) {
         //Creating the angle of each rotation.
         let numOfObjects = this.props.objects.length;
