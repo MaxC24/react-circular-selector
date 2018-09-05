@@ -29,7 +29,8 @@ class Rotator extends React.Component {
         let currentObject = this.state.selected;
         for(let i = 0; i < numOfObjects; i++) {
             rotationStyles[currentObject] = {
-                transform: `rotate(${currentAngle}DEG)`
+                transform: `rotate(${currentAngle}DEG)`,
+                transition: `transform 2s`
             }
             currentAngle+=angle;
             currentObject = currentObject+1 < numOfObjects ? currentObject+1 : 0;
