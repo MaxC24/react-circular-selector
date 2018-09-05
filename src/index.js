@@ -10,11 +10,16 @@ class Rotator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 0
+            selected: 0,
+            rotationStyles:{}
         }
     }
 
-    createRotationStyles() {
+    componentDidMount() {
+        this.createRotationStyles();
+    }
+
+    createRotationStyles(i) {
         //Creating the angle of each rotation.
         let numOfObjects = this.props.objects.length;
         let angle = 360/numOfObjects;
@@ -28,25 +33,26 @@ class Rotator extends React.Component {
             currentAngle+=angle;
             currentObject = currentObject+1 < numOfObjects ? currentObject+1 : 0;
         }
-        return rotationStyles;
+        this.setState({rotationStyles});
     }
     
     onClick(i) {
         let { onClick, objects } = this.props;
         this.setState({ selected: i }, () => {
             onClick(objects[i]);
+            this.createRotationStyles(i);
         })
     }
 
     render() {
         let { objects } = this.props;
-        let rotationStyles = this.createRotationStyles();
+        let { rotationStyles } = this.state;
         return(
             <React.Fragment>
                 {
                     objects.map((obj, i) => {
                         return (
-                            <div className="block" key={i} style={rotationStyles[i]} onClick={() => { this.setState({selected:i}) }}>
+                            <div className="block" key={i} style={rotationStyles[i]} onClick={() => { this.onClick(i) }}>
                                 {obj}
                             </div>
                         )
