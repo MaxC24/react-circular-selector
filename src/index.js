@@ -6,7 +6,7 @@ import { createBlockStyle, createContainerStyle} from './create-styles'
 
 //objects with image property
 
-class Rotator extends Component {
+class Rotator extends React.Component {
     constructor(props) {
         super(props);
         let positions = {
@@ -67,8 +67,9 @@ class Rotator extends Component {
             <div className="rotator__container" style={createContainerStyle()}>
                 {
                     objects.map((obj, i) => {
-                        return (
-                            <div className="block" key={obj} style={rotationStyles[i]} onClick={() => { this.onClick(i) }}>
+                        let classN = `block ${i === this.state.selected ? 'selected' : ''}`
+                          return (
+                            <div className={classN} key={i} style={rotationStyles[i]} onClick={() => { this.onClick(i) }}>
                                 {obj}
                             </div>
                         )
