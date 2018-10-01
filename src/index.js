@@ -6,7 +6,7 @@ import { createBlockStyle, createContainerStyle} from './create-styles'
 
 //objects with image property
 
-class Rotator extends React.Component {
+export default class Rotator extends React.Component {
     constructor(props) {
         super(props);
         let positions = {
@@ -26,7 +26,7 @@ class Rotator extends React.Component {
 
     createRotationStyles(i) {
         //Creating the angle of each rotation.
-        let numOfObjects = this.props.objects.length;
+        let numOfObjects = this.props.children.length;
         let angle = 360/numOfObjects;
         let {rotationStyles, position} = this.state;
         let currentAngle = rotationStyles[i] ? 
@@ -53,21 +53,21 @@ class Rotator extends React.Component {
     }
     
     onClick(i) {
-        let { onClick, objects } = this.props;
+        let { onClick, children } = this.props;
         this.setState({ selected: i }, () => {
-            onClick(objects[i]);
+            onClick(children[i]);
             this.createRotationStyles(i);
         })
     }
 
     render() {
-        let { objects } = this.props;
+        let { children } = this.props;
         let { rotationStyles } = this.state;
         return(
             <div className="rotator__container" style={createContainerStyle()}>
                 {
-                    objects.map((obj, i) => {
-                        let classN = `block ${i === this.state.selected ? 'selected' : ''}`
+                    children.map((obj, i) => {
+                        let classN = `${i === this.state.selected ? 'rotator-selected' : ''}`
                           return (
                             <div className={classN} key={i} style={rotationStyles[i]} onClick={() => { this.onClick(i) }}>
                                 {obj}
