@@ -1,4 +1,4 @@
-# React Rotator
+# React Circular Selector
 
 This is a dom elements rotating selector.
 
