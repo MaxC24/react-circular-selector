@@ -4,8 +4,6 @@ import { createBlockStyle, createContainerStyle} from './create-styles'
 //When an element is clicked every element transform chaging degree of rotation.
 //onClick function pass the selectedElement to the user.
 
-//objects with image property
-
 export default class Rotator extends React.Component {
     constructor(props) {
         super(props);
