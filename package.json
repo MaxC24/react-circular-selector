@@ -1,5 +1,5 @@
 {
-  "name": "react-rotator",
+  "name": "react-circular-selector",
   "version": "0.1.0",
   "description": "",
   "main": "build/index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:MaxC24/react-ctx-state.git"
+    "url": "git@github.com:MaxC24/react-circular-selector.git"
   },
   "keywords": [
     "react",
