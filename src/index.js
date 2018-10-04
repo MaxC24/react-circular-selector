@@ -4,11 +4,11 @@ import { createBlockStyle, createContainerStyle} from './create-styles'
 //When an element is clicked every element transform chaging degree of rotation.
 //onClick function pass the selectedElement to the user.
 
-export default class Rotator extends React.Component {
+export default class Rotator extends Component {
     constructor(props) {
         super(props);
         let positions = {
-            left: 180,
+            left: 0,
             right: 0
         }
         this.state = {
@@ -28,8 +28,11 @@ export default class Rotator extends React.Component {
         let angle = 360/numOfObjects;
         let {rotationStyles, position} = this.state;
         let currentAngle = rotationStyles[i] ? 
-            this._calculateCurrentAngle(rotationStyles[i].currentAngle) : position;
-        let angleDiff = rotationStyles[i] ? currentAngle - rotationStyles[i].currentAngle : angle;
+            this._calculateCurrentAngle(rotationStyles[i].currentAngle) : 
+            position;
+        let angleDiff = rotationStyles[i] ? 
+            currentAngle - rotationStyles[i].currentAngle : 
+            angle;
         let currentObject = this.state.selected;
         for(let j = 0; j < numOfObjects; j++) {
             rotationStyles[currentObject] = createBlockStyle(currentAngle, 
@@ -44,8 +47,9 @@ export default class Rotator extends React.Component {
     
     _calculateCurrentAngle(angle) {
         let { position } = this.state;
+        let { direction } = this.props;
         while(( angle+ position) % 360!==0) {
-            angle+=1;
+            direction == "counter" ? angle-=1 : angle+=1;
         }
         return angle
     }
@@ -53,7 +57,7 @@ export default class Rotator extends React.Component {
     onClick(i) {
         let { onClick, children } = this.props;
         this.setState({ selected: i }, () => {
-            onClick(children[i]);
+            onClick(i);
             this.createRotationStyles(i);
         })
     }

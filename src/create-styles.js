@@ -2,7 +2,7 @@ export function createBlockStyle(angle, position, sd) {
     return {
         position: 'absolute',
         transform: `rotate(${angle}DEG)`,
-        transformOrigin: `${ position === 'right' ? `${-sd/2}px` : `${sd/2}px` } 50px`,
+        transformOrigin: `${ position === 'right' ? `${-sd}px` : `${sd}px` } 50px`,
         transition: `transform .6s`,
         currentAngle: angle
     }
